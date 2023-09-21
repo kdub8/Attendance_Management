@@ -45,9 +45,7 @@ class Student {
 
         time_t now = time(0); // get current dat/time with respect to system  
   
-        char* dt = ctime(&now); // convert it into string  
-    
-        cout << dt << endl; // print local date and time  
+        char* dt = ctime(&now); // convert it into string
 
         cout << "Enter your username: ";
         cin >> username;
