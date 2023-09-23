@@ -194,9 +194,12 @@ return 0;
 	int checkPresenceCountbyFileName() {
 		cout << "\nCheck presence count of any Student by file name\n";	
 	Student student;
-	student.checkAttendCount();
+	char* word;
+	while (true) {
+	word = student.getNameFromFile();
+	student.checkAttendCountWithFileName(word);
 		
-
+	}
 		cout << "\nPlease press any key to continue..";
 		getchar();
 		getchar();
@@ -280,7 +283,8 @@ return 0;
 /////////////////////////////////////////////
 	int countMyAttendance(string username) {
 		Student student;
-		cout << "Current attendance as of today is " << student.checkAttendCount() << "days." << endl;
+		int days = student.checkAttendCount();
+		cout << "Current attendance as of today is " << days << " days." << endl << endl;
 		cout << "\nCounting attendance as of today!";	
 		cout << "\nPlease press any key to continue..";
 
@@ -308,7 +312,47 @@ return 0;
 		return 0;
 	}
 /////////////////////////////////////////////
+//TODO 
+//put each onlyname into an array of strings
+//pass this array of string sto the checkattendcountiwthfilename function
+//have that function go thru each onlyname to open their individual files and find their attendance count
+//probably use the gotoline function, then read the 8th line at the 18th index until the end of the line using the 
+//count.append(sa, 18, -1); line
+//look at the checkAttendCount() function
 	int getListOfStudentsPresenceCount() {
+		Student student;
+	string usernameArray [50];
+		ifstream read;
+		read.open("db.dat");
+	
+		if (read) {
+			int recordFound = 0; 
+			string line;
+			int i =0;
+			while(getline(read, line)) {
+				char name[100];
+				strcpy(name, line.c_str());//kevinlwong.dat but we want kevinlwong only
+				char ch;
+				cout << endl;
+				char* onlyname = strtok(name,"."); //kevinlwong
+				#if 0
+				for (int i = 0; i < strlen(onlyname); i++) {
+
+					ch = toupper((char)onlyname[i]);
+
+					cout << ch;
+				}	
+				#endif
+				usernameArray[i] = onlyname;
+				i++;
+				cout << endl << onlyname;
+			}
+			read.close();        
+		}
+		else {
+		cout << "\nNo record found!";
+		}
+
 		cout<<"\nAll students with their presence count !!";
 		cout<<"\nPlease press any key to continue..";
 		getchar(); 

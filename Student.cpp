@@ -21,6 +21,66 @@ class Student {
         return username;
     }
 
+    char* getNameFromFile() {
+		cout<<"\n --Check List of Student Registered by Username-- ";	
+
+		//check if record already exists..
+		ifstream read;
+		read.open("db.dat");
+
+		if (read) {
+			int recordFound = 0; 
+			string line;
+			while(getline(read, line)) {
+				char name[100];
+				strcpy(name, line.c_str());//kevinlwong.dat
+				//char onlyname[100]; //we want only kevinlwong
+				//strncpy(onlyname, name, (strlen(name) - 4));
+				char ch;
+				cout << endl;
+				char* onlyname = strtok(name,".");
+				for (int i = 0; i < strlen(onlyname); i++) {
+
+					ch = toupper((char)onlyname[i]);
+
+					cout << ch;
+				}	
+				//cout << endl << onlyname;
+                return onlyname;
+			}
+            
+			read.close();        
+		}
+		else {
+		cout << "\nNo record found!";
+		}
+		
+		return NULL;
+	}
+
+    int checkAttendCountWithFileName (const char* filename) {
+
+        time_t now = time(0); // get current dat/time with respect to system  
+        string s = filename;
+        char* dt = ctime(&now); // convert it into string
+        s.append(".dat");
+        fstream userfile;
+        userfile.open(s);
+        GotoLine(userfile, 8);
+        string sa;
+        string count = "";
+        while (getline(userfile, sa)) {
+            userfile >> sa;
+        }
+        count.append(sa, 18, -1);
+        int integerCount = stoi(count);
+        cout << "Current Attendance Count for " << username << " is " << integerCount << " as of " << dt;
+        userfile.close();
+        
+        return integerCount;
+        
+    };
+
     int checkAttendCount() {
         string username;
 
@@ -45,7 +105,7 @@ class Student {
         cout << "Current Attendance Count for " << username << " is " << integerCount << " as of " << dt;
         userfile.close();
         
-        return attendanceCount;
+        return integerCount;
         };
 
         #if 0
