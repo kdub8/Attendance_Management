@@ -22,6 +22,29 @@ class Student {
     }
 
     int checkAttendCount() {
+        string username;
+
+        time_t now = time(0); // get current dat/time with respect to system  
+  
+        char* dt = ctime(&now); // convert it into string
+
+        cout << "Enter your username: ";
+        cin >> username;
+        cout << endl;
+        string filename = username.append(".dat");
+        fstream userfile;
+        userfile.open(filename);
+        GotoLine(userfile, 8);
+        string sa;
+        string count = "";
+        while (getline(userfile, sa)) {
+            userfile >> sa;
+        }
+        count.append(sa, 18, -1);
+        int integerCount = stoi(count);
+        cout << "Current Attendance Count for " << username << " is " << integerCount << " as of " << dt;
+        userfile.close();
+        
         return attendanceCount;
         };
 

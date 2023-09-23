@@ -16,7 +16,7 @@ int getAllStudentsbyRollNum();
 int deleteAllStudents();
 int deleteStudentbyFileName();
 int checkListOfStudentsRegistered();
-int checkPresenceCountbyRollNum();
+int checkPresenceCountbyFileName();
 int getListOfStudentsPresenceCount();
 int registerStudent();
 int adminLogin();
@@ -73,7 +73,7 @@ return 0;
 							break;
 					case 4: checkListOfStudentsRegistered(); 
 							break;
-					case 5: checkPresenceCountbyRollNum(); 
+					case 5: checkPresenceCountbyFileName(); 
 							break;
 					case 6: getListOfStudentsPresenceCount(); 
 							break;
@@ -191,8 +191,11 @@ return 0;
 		return 0;
 	}
 /////////////////////////////////////////////
-	int checkPresenceCountbyRollNum() {
-		cout << "\nCheck presence count of any Student by roll number\n";	
+	int checkPresenceCountbyFileName() {
+		cout << "\nCheck presence count of any Student by file name\n";	
+	Student student;
+	student.checkAttendCount();
+		
 
 		cout << "\nPlease press any key to continue..";
 		getchar();
